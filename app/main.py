@@ -1,9 +1,10 @@
 import requests
+import os
 
 
-def get_weather() -> None:
+def get_weather() -> str:
 
-    API_KEY = "b47adef0ac6d4d919b5131859253105"
+    API_KEY = os.environ.get("API_KEY")
     CITY = "Paris"
 
     url = f"http://api.weatherapi.com/v1/current.json?key={API_KEY}&q={CITY}&lang=en"
@@ -15,8 +16,6 @@ def get_weather() -> None:
         temp = data["current"]["temp_c"]
         condition = data["current"]["condition"]["text"]
         return f"Weather in {location}: {condition}, {temp}°C"
-    else:
-        return f"Mistake {response.status_code} - failed to retrieve data."
 
 
 if __name__ == "__main__":
